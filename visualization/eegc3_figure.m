@@ -1,6 +1,6 @@
 % 2009-12-07  Michele Tavella <michele.tavella@epfl.ch>
 
-function fh = eegc2_figure(h, options, basename, psize)
+function fh = eegc3_figure(h, options, basename, psize)
 
 if(nargin >= 1)
 	if ishandle(h)
@@ -20,13 +20,13 @@ if(nargin > 1)
 	switch(options)
 		case 'fill'
 			k = 1.00;
-			%disp('[eegc2_figure] Filling');
+			%disp('[eegc3_figure] Filling');
 			set(gca, 'Position', ...
 				get(gca, 'OuterPosition') - ...
 				get(gca, 'TightInset') * [-k 0 k 0; 0 -k 0 k; 0 0 k 0; 0 0 0 k]);
 		case 'print'
 			if(nargin >= 3)
-				disp(['[eegc2_figure] Printing to ' basename]);
+				disp(['[eegc3_figure] Printing to ' basename]);
 				set(h, 'renderer', 'painters');
 				set(h, 'PaperUnits', 'centimeters');
 				if(nargin >= 4)
@@ -51,7 +51,7 @@ if(nargin > 1)
                     print(h, '-depsc2', [basename '.eps']);
                 end
 			else
-				disp('[eegc2_figure] Error: no basename specified');
+				disp('[eegc3_figure] Error: no basename specified');
             end
         otherwise	
             set(gcf, 'Name', options);
