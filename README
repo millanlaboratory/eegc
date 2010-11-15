@@ -1,18 +1,18 @@
 2010-11-08  Michele Tavella <michele.tavella@epfl.ch>
 
-apps	Applications (eegc2_cnbi_main, etc.)
-cf 		Configuration
-cl		Classification
-dm		Data manipulation: handling of data, at a very high level.
-ds		Dataset: handling of datasets of any kind (EEG, PSD, etc.)
-fe		Feature extraction
-fs		Feature selection
-gui 	GUIs for users
-io		Input/Output: read/write GDF, BDF, TXT, MAT
-md		Modules that integrate different atomic functionalities
-pa		Performance analysis: evaluation of performances
-pp		EEG preprocessing (DC, CAR, Laplacian)
-tt		Test tools
+	Applications (eegc2_cnbi_main, etc.)
+	Configuration
+	Classification
+	Data manipulation: handling of data, at a very high level.
+	Dataset: handling of datasets of any kind (EEG, PSD, etc.)
+	Feature extraction
+	Feature selection
+	GUIs for users
+	Input/Output: read/write GDF, BDF, TXT, MAT
+	Modules that integrate different atomic functionalities
+	Performance analysis: evaluation of performances
+	EEG preprocessing (DC, CAR, Laplacian)
+	Test tools
 
 2010-11-08  Michele Tavella <michele.tavella@epfl.ch>
 

@@ -97,5 +97,5 @@ if(doplot)
 	drawnow;
 
 	eegc2_figure(doplot, 'print', ...
-		[bci.trace.eegc3_smr_simloop.figbasename '.simprotocol.pdf']);
+		[bci.trace.eegc3_smr_simloop.figbasename '.simprotocol.png']);
 end

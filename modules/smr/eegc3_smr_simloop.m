@@ -19,7 +19,7 @@ end
 
 % Inialize BCI structure
 bci = eegc3_smr_newbci();
-bci.trace.eegc3_smr_simloop.timestamp 	= eegc3_time_date();
+bci.trace.eegc3_smr_simloop.timestamp 	= eegc3_date();
 bci.trace.eegc3_smr_simloop.filegdf     = filegdf;
 bci.trace.eegc3_smr_simloop.filetxt     = filetxt;
 bci.trace.eegc3_smr_simloop.rejection   = rejection;
@@ -79,6 +79,7 @@ bci.trg = [];		% LPT Trigger value (TODO)
 bci.lbl = [];		% GDF label event
 bci.Sf = bci.analysis.settings.eeg.fs/bci.frames;
 bci.t = mt_support(0, bci.framet, bci.Sf);
+kk
 
 % Temporary data structures for simulating the loop
 tmp.framed = [];	% EEG frame
@@ -170,7 +171,7 @@ if(doplot)
 			xlabel('EEG frames');
 		drawnow;
 	eegc2_figure(doplot, 'print', ...
-		[bci.trace.eegc3_smr_simloop.figbasename '.simloop.pdf']);
+		[bci.trace.eegc3_smr_simloop.figbasename '.simloop.png']);
 
 end
 
