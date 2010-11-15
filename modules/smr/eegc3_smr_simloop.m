@@ -79,7 +79,6 @@ bci.trg = [];		% LPT Trigger value (TODO)
 bci.lbl = [];		% GDF label event
 bci.Sf = bci.analysis.settings.eeg.fs/bci.frames;
 bci.t = mt_support(0, bci.framet, bci.Sf);
-kk
 
 % Temporary data structures for simulating the loop
 tmp.framed = [];	% EEG frame
@@ -111,7 +110,6 @@ for i = 1:1:bci.framet
 	bci.support = eegserver_mi_buffer_support(bci.support, tmp.framed);
 	[bci.support, tmp.nfeat, tmp.afeat] = ...
 		eegserver_mi_classify(bci.analysis, bci.support);
-	bci.nfeats = [bci.nfeats; tmp.nfeat];
 	
 	% Add features to BCI structure if not empty
 	if(isempty(tmp.nfeat) == false)
