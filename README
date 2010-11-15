@@ -1,0 +1,22 @@
+2010-11-08  Michele Tavella <michele.tavella@epfl.ch>
+
+apps	Applications (eegc2_cnbi_main, etc.)
+cf 		Configuration
+cl		Classification
+dm		Data manipulation: handling of data, at a very high level.
+ds		Dataset: handling of datasets of any kind (EEG, PSD, etc.)
+fe		Feature extraction
+fs		Feature selection
+gui 	GUIs for users
+io		Input/Output: read/write GDF, BDF, TXT, MAT
+md		Modules that integrate different atomic functionalities
+pa		Performance analysis: evaluation of performances
+pp		EEG preprocessing (DC, CAR, Laplacian)
+tt		Test tools
+
+2010-11-08  Michele Tavella <michele.tavella@epfl.ch>
+
+			Nov-Dec 2010	Jan-Feb 2011
+Simis		ds				fe, fs
+Andrea		io				pp
+Michele		tt				dm, cf
