@@ -67,9 +67,9 @@ if(doplot)
 	end
 	% Draw cues
 	for j = 1:length(cues)
-		roi.cues = bci.evt(find(bci.lbl ==  cues(j)));
-		for i = 1:length(roi.cues)
-			eegc3_smr_barv(roi.cues(i)/bci.Sf, cuecolors{j}, 2);
+		roi.cues{j} = bci.evt(find(bci.lbl ==  cues(j)));
+		for i = 1:length(roi.cues{j})
+			eegc3_smr_barv(roi.cues{j}(i)/bci.Sf, cuecolors{j}, 2);
 		end
 	end
 
@@ -88,14 +88,19 @@ if(doplot)
 	end
 	% Draw cues
 	for j = 1:length(cues)
-		roi.cues = bci.evt(find(bci.lbl ==  cues(j)));
-		for i = 1:length(roi.cues)
-			text(roi.cues(i)/bci.Sf, 1.015, num2str(cues(j)), ...
+		roi.cues{j} = bci.evt(find(bci.lbl ==  cues(j)));
+		for i = 1:length(roi.cues{j})
+			text(roi.cues{j}(i)/bci.Sf, 1.015, num2str(cues(j)), ...
 				'HorizontalAlignment', 'center');
 		end
 	end
-	drawnow;
-
+	% Draw trial lines
+	roi.trial0 = sort([roi.cues{1} roi.cues{2}]);
+	roi.trial1 = sort([roi.hits roi.miss]);
+	for i = 1:length(roi.trial0)
+		eegc3_smr_bart([roi.trial0(i) roi.trial1(i)]/bci.Sf);
+	end
+	kk
 	eegc2_figure(doplot, 'print', ...
 		[bci.trace.eegc3_smr_simloop.figbasename '.simprotocol.png']);
 end
