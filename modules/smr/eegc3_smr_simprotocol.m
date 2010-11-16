@@ -47,7 +47,6 @@ if(doplot)
 	ylim([0 1]);
 	xlim([bci.t(1) bci.t(end)]);
 	grid on;
-	drawnow;
 
 	eegc3_smr_barh(0.5, 'k', 1);
 	eegc3_smr_barh(thresholds(1), 'k', 1);
@@ -97,10 +96,13 @@ if(doplot)
 	% Draw trial lines
 	roi.trial0 = sort([roi.cues{1} roi.cues{2}]);
 	roi.trial1 = sort([roi.hits roi.miss]);
-	for i = 1:length(roi.trial0)
-		eegc3_smr_bart([roi.trial0(i) roi.trial1(i)]/bci.Sf);
+	if(length(roi.trial0) == length(roi.trial1))
+		for i = 1:length(roi.trial0)
+			eegc3_smr_bart([roi.trial0(i) roi.trial1(i)]/bci.Sf);
+		end
 	end
-	kk
+	drawnow;
+	
 	eegc2_figure(doplot, 'print', ...
 		[bci.trace.eegc3_smr_simloop.figbasename '.simprotocol.png']);
 end
