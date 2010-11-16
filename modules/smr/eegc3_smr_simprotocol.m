@@ -1,6 +1,6 @@
 % 2010-11-10  Michele Tavella <michele.tavella@epfl.ch>
 % TODO
-function eegc3_smr_simprotocol(bci, cues, cuecolors, thresholds, doplot);
+function roi = eegc3_smr_simprotocol(bci, cues, cuecolors, thresholds, doplot);
 %	revents, eventcolors, doplot)
 
 % These events are defaulted for SMR BCI:
@@ -14,8 +14,8 @@ roi.cfbk = bci.evt(find(bci.lbl == 781));
 
 if(isempty(cues))
 	printf('[eegc3_smr_simprotocol] Guessing cues: ');
-	cues = setdiff(unique(bci.lbl), [897 898 781]);
 	cuecolors = {};
+	cues = setdiff(unique(bci.lbl), [897 898 781]);
 	for i = 1:length(cues)
 		printf('%d ', cues(i));
 		cuecolors{end+1} = 'k';
@@ -106,3 +106,17 @@ if(doplot)
 	eegc2_figure(doplot, 'print', ...
 		[bci.trace.eegc3_smr_simloop.figbasename '.simprotocol.png']);
 end
+
+
+perf.Nh = length(roi.hits);
+perf.Nm = length(roi.miss);
+perf.N = perf.Nh + perf.Nm;
+perf.P = perf.Nh/perf.N;
+perf.E = perf.Nm/perf.N;
+perf.C = zeros(2, 2);
+
+printf('[eegc3_smr_simprotocol] Performances:\n');
+printf(' Hits: %.2f%% (%d/%d)\n', ...
+	100*perf.P, perf.Nh, perf.N);
+printf(' Miss: %.2f%% (%d/%d)\n', ...
+	100*perf.E, perf.Nm, perf.N);
