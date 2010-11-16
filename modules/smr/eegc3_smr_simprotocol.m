@@ -1,6 +1,7 @@
 % 2010-11-10  Michele Tavella <michele.tavella@epfl.ch>
 % TODO
-function roi = eegc3_smr_simprotocol(bci, cues, cuecolors, thresholds, doplot);
+function roi = eegc3_smr_simprotocol(bci, cues, cuecolors, cuesskip, ...
+	thresholds, plottrials, doplot);
 %	revents, eventcolors, doplot)
 
 % These events are defaulted for SMR BCI:
@@ -16,6 +17,7 @@ if(isempty(cues))
 	printf('[eegc3_smr_simprotocol] Guessing cues: ');
 	cuecolors = {};
 	cues = setdiff(unique(bci.lbl), [897 898 781]);
+	cues = setdiff(cues, cuesskip);
 	for i = 1:length(cues)
 		printf('%d ', cues(i));
 		cuecolors{end+1} = 'k';
@@ -94,11 +96,13 @@ if(doplot)
 		end
 	end
 	% Draw trial lines
-	roi.trial0 = sort([roi.cues{1} roi.cues{2}]);
-	roi.trial1 = sort([roi.hits roi.miss]);
-	if(length(roi.trial0) == length(roi.trial1))
-		for i = 1:length(roi.trial0)
-			eegc3_smr_bart([roi.trial0(i) roi.trial1(i)]/bci.Sf);
+	if(plottrials)
+		roi.trial0 = sort([roi.cues{1} roi.cues{2}]);
+		roi.trial1 = sort([roi.hits roi.miss]);
+		if(length(roi.trial0) == length(roi.trial1))
+			for i = 1:length(roi.trial0)
+				eegc3_smr_bart([roi.trial0(i) roi.trial1(i)]/bci.Sf);
+			end
 		end
 	end
 	drawnow;
