@@ -125,7 +125,7 @@ for i = 1:1:bci.framet
 	end
 	bci.cprobs(end+1, :) = bci.support.probs;
 	bci.iprobs(end+1, :) = bci.support.postprobs;
-
+	
 	% Check for raising edges in current frame
 	trgdetect.tnow = length(find(data.red(tmp.frame0:tmp.frame1) == 1));
 	if(trgdetect.tnow == 1)
