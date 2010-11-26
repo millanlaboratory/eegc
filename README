@@ -20,3 +20,8 @@
 Simis		ds				fe, fs
 Andrea		io				pp
 Michele		tt				dm, cf
+
+
+2010-11-26  Michele Tavella <michele.tavella@epfl.ch>
+Remember to add this to your bashrc:
+ export EEGC3_ROOT=~/Git/inhouse/eegc3

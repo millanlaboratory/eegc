@@ -19,15 +19,15 @@ mtpath_include([basename '/visualization/']);
 
 % Need to reshape this stuff
 warning('off','MATLAB:dispatcher:InexactCaseMatch');
-mtpath_include('$CNBI_ROOT/Projects/Classification/Gaussian');
-mtpath_include('$CNBI_ROOT/Projects/FeatureSelection/CVA');
-mtpath_include('$CNBI_ROOT/Projects/gdfmatlab');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/gkde');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t200');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t250');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t300');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t400');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t490');
-mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t500');
+mtpath_include('$EEGC3_INCLUDES/gaussian');
+mtpath_include('$EEGC3_INCLUDES/cva');
+mtpath_include('$EEGC3_INCLUDES/gdfmatlab');
+mtpath_include('$EEGC3_INCLUDES/gkde');
+mtpath_include('$EEGC3_INCLUDES/biosig');
+mtpath_include('$EEGC3_INCLUDES/biosig/t200');
+mtpath_include('$EEGC3_INCLUDES/biosig/t250');
+mtpath_include('$EEGC3_INCLUDES/biosig/t300');
+mtpath_include('$EEGC3_INCLUDES/biosig/t400');
+mtpath_include('$EEGC3_INCLUDES/biosig/t490');
+mtpath_include('$EEGC3_INCLUDES/biosig/t500');
 warning('on','MATLAB:dispatcher:InexactCaseMatch');
