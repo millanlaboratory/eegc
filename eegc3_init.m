@@ -16,3 +16,18 @@ mtpath_include([basename '/performance/']);
 mtpath_include([basename '/preprocessing/']);
 mtpath_include([basename '/tools/']);
 mtpath_include([basename '/visualization/']);
+
+% Need to reshape this stuff
+warning('off','MATLAB:dispatcher:InexactCaseMatch');
+mtpath_include('$CNBI_ROOT/Projects/Classification/Gaussian');
+mtpath_include('$CNBI_ROOT/Projects/FeatureSelection/CVA');
+mtpath_include('$CNBI_ROOT/Projects/gdfmatlab');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/gkde');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t200');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t250');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t300');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t400');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t490');
+mtpath_include('$CNBI_ROOT/Thirdparty/matlab/biosig/t500');
+warning('on','MATLAB:dispatcher:InexactCaseMatch');

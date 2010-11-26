@@ -37,11 +37,11 @@ if(iscell(frqs))
 	fvector = [];
 	if(isempty(win) | isempty(ovl))
 		for ch = channels
-			fvector = [fvector; eegc2_bp(data(:, ch), fs, frqs{ch})];
+			fvector = [fvector; eegc3_bp(data(:, ch), fs, frqs{ch})];
 		end	
 	else
 		for ch = channels
-			fvector = [fvector; eegc2_wpsd(data(:, ch), frqs{ch}, fs, win, ovl)];
+			fvector = [fvector; eegc3_psd(data(:, ch), frqs{ch}, fs, win, ovl)];
 		end	
 	end
 else
@@ -49,11 +49,11 @@ else
 	fvector = zeros(size(data, 2), length(frqs));
 	if(isempty(win) | isempty(ovl))
 		for ch = channels
-			fvector(ch, :) = eegc2_bp(data(:, ch), fs, frqs);
+			fvector(ch, :) = eegc3_bp(data(:, ch), fs, frqs);
 		end
 	else
 		for ch = channels 
-			fvector(ch, :) = eegc2_wpsd(data(:, ch), frqs, fs, win, ovl);
+			fvector(ch, :) = eegc3_psd(data(:, ch), frqs, fs, win, ovl);
 		end
 	end
 end

@@ -63,7 +63,10 @@ data.lbl = data.hdr.EVENT.TYP;
 % Set up simulated BCI
 bci.analysis = load(fileanalysis);
 bci.analysis = bci.analysis.analysis;
-bci.support = eegserver_mi_new_support(bci.analysis, rejection, integration);
+bci.eeg = ndf_ringbuffer(bci.analysis.settings.eeg.fs, ...
+	bci.analysis.settings.eeg.chs, 1);
+bci.tri = ndf_ringbuffer(bci.analysis.settings.eeg.fs, 1, 1);
+bci.support = eegc3_smr_newsupport(bci.analysis, rejection, integration);
 bci.frames = bci.analysis.settings.features.win.shift* ...
 		bci.analysis.settings.eeg.fs;
 bci.framet = size(data.eeg, 1) / bci.frames;
@@ -107,9 +110,11 @@ for i = 1:1:bci.framet
 	tmp.framed = data.eeg(tmp.frame0:tmp.frame1, :);
 
 	% Classify EEG frame
-	bci.support = eegserver_mi_buffer_support(bci.support, tmp.framed);
+	bci.eeg = ndf_add2buffer(bci.eeg, tmp.framed(:,1:end-1));
+	bci.tri = ndf_add2buffer(bci.tri, tmp.framed(:,end));
+	%bci.support = eegserver_mi_buffer_support(bci.support, tmp.framed);
 	[bci.support, tmp.nfeat, tmp.afeat] = ...
-		eegserver_mi_classify(bci.analysis, bci.support);
+		eegc3_smr_classify(bci.analysis, bci.eeg, bci.support);
 	
 	% Add features to BCI structure if not empty
 	if(isempty(tmp.nfeat) == false)
@@ -123,8 +128,8 @@ for i = 1:1:bci.framet
 		%	[Freqs x Ch]
 		bci.afeats(tmp.framep, :, :) = tmp.afeat';
 	end
-	bci.cprobs(end+1, :) = bci.support.probs;
-	bci.iprobs(end+1, :) = bci.support.postprobs;
+	bci.cprobs(end+1, :) = bci.support.cprobs;
+	bci.iprobs(end+1, :) = bci.support.nprobs;
 	
 	% Check for raising edges in current frame
 	trgdetect.tnow = length(find(data.red(tmp.frame0:tmp.frame1) == 1));
@@ -146,7 +151,7 @@ for i = 1:1:bci.framet
 end
 
 if(doplot)
-	eegc2_figure(doplot);
+	eegc3_figure(doplot);
 		subplot(4, 1, 1:2)
 			plot(bci.t, data.cprobs(:, 1), 'ko');
 			hold on;
@@ -168,7 +173,7 @@ if(doplot)
 			imagesc(flipud(bci.nfeats'));
 			xlabel('EEG frames');
 		drawnow;
-	eegc2_figure(doplot, 'print', ...
+	eegc3_figure(doplot, 'print', ...
 		[bci.trace.eegc3_smr_simloop.figbasename '.simloop.png']);
 
 end
