@@ -36,7 +36,7 @@ for i = 1:length(entries)
 	end
 	printf('\n');
 end
-delete cache;
+clear cache;
 
 printf('[eegc3_smr_loadlog] Detecting online/offline:\n');
 online = {};
