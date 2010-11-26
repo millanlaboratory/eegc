@@ -41,7 +41,7 @@ if(doplot == false)
 end
 
 if(doplot)
-	eegc2_figure(doplot);
+	eegc3_figure(doplot);
 	plot(bci.t, bci.cprobs(:, 1), 'r.');
 	hold on;
 	plot(bci.t, bci.iprobs(:, 1), 'k.');
@@ -107,7 +107,7 @@ if(doplot)
 	end
 	drawnow;
 	
-	eegc2_figure(doplot, 'print', ...
+	eegc3_figure(doplot, 'print', ...
 		[bci.trace.eegc3_smr_simloop.figbasename '.simprotocol.png']);
 end
 
