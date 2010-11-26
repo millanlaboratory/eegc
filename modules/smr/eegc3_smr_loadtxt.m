@@ -1,6 +1,6 @@
 % 2009-12-08  Michele Tavella <michele.tavella@epfl.ch>
 
-function sessions = eegc2_ttool_loaddescription(descriptionfile)
+function sessions = eegc3_smr_loadtxt(descriptionfile)
 
 filename = 'description.txt';
 slashes = strfind(descriptionfile, '/');
