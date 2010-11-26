@@ -2,23 +2,24 @@
 % Import all directories but modules
 [file, basename] = mtpath_basename(which('eegc3_init'));
 
-mtpath_include([basename '/apps/']);
-mtpath_include([basename '/classification/']);
-mtpath_include([basename '/configuration/']);
-mtpath_include([basename '/dataset/']);
-mtpath_include([basename '/featureextraction/']);
-mtpath_include([basename '/featureselection/']);
-mtpath_include([basename '/gui/']);
-mtpath_include([basename '/inputoutput/']);
-mtpath_include([basename '/integration/']);
-mtpath_include([basename '/management/']);
-mtpath_include([basename '/performance/']);
-mtpath_include([basename '/preprocessing/']);
-mtpath_include([basename '/tools/']);
-mtpath_include([basename '/visualization/']);
+mtpath_include('$EEGC3_ROOT/apps/');
+mtpath_include('$EEGC3_ROOT/classification/');
+mtpath_include('$EEGC3_ROOT/configuration/');
+mtpath_include('$EEGC3_ROOT/dataset/');
+mtpath_include('$EEGC3_ROOT/featureextraction/');
+mtpath_include('$EEGC3_ROOT/featureselection/');
+mtpath_include('$EEGC3_ROOT/gui/');
+mtpath_include('$EEGC3_ROOT/inputoutput/');
+mtpath_include('$EEGC3_ROOT/integration/');
+mtpath_include('$EEGC3_ROOT/management/');
+mtpath_include('$EEGC3_ROOT/performance/');
+mtpath_include('$EEGC3_ROOT/preprocessing/');
+mtpath_include('$EEGC3_ROOT/tools/');
+mtpath_include('$EEGC3_ROOT/visualization/');
 
 % Need to reshape this stuff
 warning('off','MATLAB:dispatcher:InexactCaseMatch');
+mtpath_include('$EEGC3_INCLUDES/xml4mat');
 mtpath_include('$EEGC3_INCLUDES/gaussian');
 mtpath_include('$EEGC3_INCLUDES/cva');
 mtpath_include('$EEGC3_INCLUDES/gdfmatlab');
