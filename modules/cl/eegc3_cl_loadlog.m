@@ -1,5 +1,4 @@
 % 2009-12-08  Michele Tavella <michele.tavella@epfl.ch>
-% I'm so fucking awesome with u guys...
 function session = eegc3_smr_loadlog(filename)
 
 printf('[eegc3_smr_loadlog] Loading: %s\n', filename);
@@ -37,6 +36,7 @@ for i = 1:length(entries)
 	end
 	printf('\n');
 end
+delete cache;
 
 printf('[eegc3_smr_loadlog] Detecting online/offline:\n');
 online = {};
@@ -54,10 +54,16 @@ for i = 1:length(all)
 	printf('online\n');
 end
 
-session = {};
-[session.name, session.path] = mtpath_basename(filename);
-session.name = strrep(session.name, '.log', '');
-session.logfile = filename;
-session.all     = all;
-session.online  = online;
-session.offline = offline;
+% Recall & harvest
+session = eegc3_cl_newsession();
+[session.base, session.path] = mtpath_basename(filename);
+session.base= strrep(session.base, '.log', '');
+[session.name, session.root] = mtpath_basename(session.path);
+
+cache = mt_strsplit('_', session.name);
+session.daytime = cache{1};
+session.subject = cache{2};
+
+session.runs.all     = all;
+session.runs.online  = online;
+session.runs.offline = offline;

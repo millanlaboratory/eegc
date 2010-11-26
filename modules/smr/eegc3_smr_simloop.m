@@ -19,7 +19,7 @@ end
 
 % Inialize BCI structure
 bci = eegc3_smr_newbci();
-bci.trace.eegc3_smr_simloop.timestamp 	= eegc3_date();
+bci.trace.eegc3_smr_simloop.datetime    = eegc3_datetime();
 bci.trace.eegc3_smr_simloop.filegdf     = filegdf;
 bci.trace.eegc3_smr_simloop.filetxt     = filetxt;
 bci.trace.eegc3_smr_simloop.rejection   = rejection;
