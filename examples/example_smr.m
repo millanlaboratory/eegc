@@ -26,5 +26,7 @@ for i = 1:length(session.runs.online)
 				str2num(session.runs.online{i}.i), ...
 				1000 + i);
 	end
-end
 
+	[taskset, resetevents] = eegc3_smr_guesstask(labels);
+	eegc3_smr_simprotocol(bci, taskset.cues, taskset.colors, [], [], 1, 2000 + i);
+end

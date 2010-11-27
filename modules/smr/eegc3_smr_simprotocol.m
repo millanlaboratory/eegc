@@ -42,9 +42,9 @@ end
 
 if(doplot)
 	eegc3_figure(doplot);
-	plot(bci.t, bci.cprobs(:, 1), 'r.');
+	plot(bci.t, bci.cprobs(:, 1), '.', 'Color', [0.5 0.5 0.5]);
 	hold on;
-	plot(bci.t, bci.iprobs(:, 1), 'k.');
+	plot(bci.t, bci.iprobs(:, 1), '.', 'Color', [0.0 0.0 0.0]);
 	hold off;
 	ylim([0 1]);
 	xlim([bci.t(1) bci.t(end)]);
@@ -64,13 +64,13 @@ if(doplot)
 	end
 	% Draw continuos feedback
 	for i = 1:length(roi.cfbk)
-		eegc3_smr_barv(roi.cfbk(i)/bci.Sf, 'k', 1);
+		eegc3_smr_barv(roi.cfbk(i)/bci.Sf, 'k', 2);
 	end
 	% Draw cues
 	for j = 1:length(cues)
 		roi.cues{j} = bci.evt(find(bci.lbl ==  cues(j)));
 		for i = 1:length(roi.cues{j})
-			eegc3_smr_barv(roi.cues{j}(i)/bci.Sf, cuecolors{j}, 2);
+			eegc3_smr_barv(roi.cues{j}(i)/bci.Sf, cuecolors{j}, 3);
 		end
 	end
 
