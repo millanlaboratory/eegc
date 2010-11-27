@@ -30,10 +30,9 @@ end
 fclose(fid); 
 
 printf('[eegc3_smr_loadlog] Allocating stuctures:\n');
-cache = {};
 for i = 1:length(entries)
-	session.runs.all{i}.file = cell2mat(entries{i}{1});
-	printf('  %-35.35s ', session.runs.all{i}.file);
+	session.runs.all{i}.xdf = cell2mat(entries{i}{1});
+	printf('  %-35.35s ', session.runs.all{i}.xdf);
 	for j = 2:11
 		if(isempty(entries{i}{j}) == true)
 			if(j == 2)
@@ -41,6 +40,7 @@ for i = 1:length(entries)
 			end
 			break;
 		end
+		cache = {};
 		cache.buffer = cell2mat(entries{i}{j});
 		cache.fields = mt_strsplit('=', cache.buffer);
 		cache.name = cache.fields{1};
@@ -55,25 +55,26 @@ clear cache;
 
 printf('[eegc3_smr_loadlog] Detecting online/offline:\n');
 for i = 1:length(session.runs.all)
-	printf('  %-35.35s ', session.runs.all{i}.file);
+	printf('  %-35.35s ', session.runs.all{i}.xdf);
 	try
-		session.runs.all{i}.file =[session.path '/' session.runs.all{i}.file];
+		session.runs.all{i}.xdf =[session.path '/' session.runs.all{i}.xdf];
 		session.runs.all{i}.classifier =[session.path '/' session.runs.all{i}.classifier];
 	catch
 		session.runs.offline{end+1} = session.runs.all{i};
 		printf('offline\n');
 		continue;
 	end
-	session.runs.online{end+1} = session.runs.all{i};
 	printf('online ');
 	try
 		session.runs.all{i}.frames;
 		session.trace.eegcversion = 2;
-		session.runs.all{i}.classifier = [session.runs.all{i}.classifier '.3'];
+		%session.runs.all{i}.classifier = [session.runs.all{i}.classifier '.3'];
+		session.runs.all{i}.txt = strrep(session.runs.all{i}.xdf, 'gdf', 'txt');
 		printf(' [eegc v2]');
 	catch
 		session.trace.eegcversion = 3;
 		printf(' [eegc v3]');
 	end
 	printf('%s\n', ' ');
+	session.runs.online{end+1} = session.runs.all{i};
 end
