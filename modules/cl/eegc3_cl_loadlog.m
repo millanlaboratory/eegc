@@ -5,6 +5,26 @@
 %    session = eegc3_cl_loadlog(logfile);
 function session = eegc3_cl_loadlog(filename)
 
+		
+session = {};
+switch(exist(filename)) 
+	case 2
+		printf('[eegc3_smr_loadlog] Loading: %s\n', filename);
+	case 7
+		filelist = dir(fullfile(filename, '*.log'));
+		if(size(filelist, 1) == 1)
+			filename = [filename '/' filelist(1).name];
+			printf('[eegc3_cl_loadlog] Log found: %s\n', filename);
+		else
+			printf('[eegc3_cl_loadlog] Error: %d log files found\n', ...
+				size(filelist, 1));
+			return;
+		end
+	case 0
+		printf('[eegc3_cl_loadlog] Error: file/directory not found');
+		return;
+end
+
 % Recsession.runs.all & harvest
 session = eegc3_cl_newsession();
 [session.base, session.path] = mtpath_basename(filename);
@@ -16,7 +36,7 @@ session.daytime = cache{1};
 session.subject = cache{2};
 
 
-printf('[eegc3_smr_loadlog] Loading: %s\n', filename);
+%printf('[eegc3_smr_loadlog] Loading: %s\n', filename);
 fid = fopen(filename, 'r');
 entries = {};
 while 1
@@ -45,7 +65,8 @@ for i = 1:length(entries)
 		cache.fields = mt_strsplit('=', cache.buffer);
 		cache.name = cache.fields{1};
 		cache.value = cache.fields{2};
-		cache.expression = ['session.runs.all{i}.' cache.name ' = ''' cache.value ''';'];
+		cache.expression = ...
+			['session.runs.all{i}.' cache.name ' = ''' cache.value ''';'];
 		eval(cache.expression);
 		printf('%s ', cache.name);
 	end

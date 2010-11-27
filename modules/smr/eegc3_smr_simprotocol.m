@@ -42,6 +42,7 @@ end
 
 if(doplot)
 	eegc3_figure(doplot);
+	clf;
 	plot(bci.t, bci.cprobs(:, 1), '.', 'Color', [0.5 0.5 0.5]);
 	hold on;
 	plot(bci.t, bci.iprobs(:, 1), '.', 'Color', [0.0 0.0 0.0]);
@@ -106,6 +107,7 @@ if(doplot)
 		end
 	end
 	drawnow;
+	eegc3_figure(doplot, 'fill');
 	eegc3_figure(doplot, 'print', ...
 		[bci.trace.eegc3_smr_simloop.figbasename '.simprotocol.png']);
 end
