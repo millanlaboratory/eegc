@@ -141,8 +141,7 @@ for i = 1:1:bci.framet
 		bci.evt(end+1) = tmp.framep;
 		bci.lbl(end+1) = data.lbl(length(bci.evt));
 		if(find(resetevents == bci.lbl(end)))
-			%bci.support.postprobs = bci.support.dist.uniform;
-			bci.iprobs(end, :) = bci.support.dist.uniform;
+			bci.support.nprobs = bci.support.dist.uniform;
 		end
 	elseif(trgdetect.tnow > 1)
 		printf('[eegc3_smr_simloop] Found >1 trigger in a single frame!\n');
@@ -180,7 +179,6 @@ if(doplot && isempty(filetxt) == false)
 		drawnow;
 	eegc3_figure(doplot, 'print', ...
 		[bci.trace.eegc3_smr_simloop.figbasename '.simloop.png']);
-
 end
 
 printf('[eegc3_smr_simloop] Saving SMR-BCI structure: %s\n', ...
