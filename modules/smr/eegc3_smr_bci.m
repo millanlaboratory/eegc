@@ -45,9 +45,11 @@ elseif(nargout == 3)
 
 	feature = [];
 	for ch = analysis.tools.features.channels
-		bn = find(analysis.settings.features.psd.freqs == ...
-			analysis.tools.features.bands{ch});
-		feature = [feature; afeature(ch, bn)];
+		bns = analysis.tools.features.bands{ch}; 
+		for bni = bns
+			bn = find(analysis.settings.features.psd.freqs == bni);
+			feature = [feature; afeature(ch, bn)];
+		end
 	end
 end
 
