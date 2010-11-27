@@ -8,7 +8,7 @@ if [ "z$ROOTFOLDER" == "z" ]; then
 	exit 1;
 fi
 
-echo '[descrition2log] Root folder is: $ROOTFOLDER';
+echo "[descrition2log] Root folder is: $ROOTFOLDER";
 
 for txtfile in `find  $ROOTFOLDER -iname "description.txt"`; do
 	dirname=`dirname $txtfile`;
