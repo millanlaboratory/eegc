@@ -1,4 +1,4 @@
-function bci = eegc3_smr_simloop(filegdf, filetxt, fileanalysis, ... 
+function bci = eegc3_smr_simloop(filexdf, filetxt, filemat, ... 
 	rejection, integration, doplot, resetevents)
 % 2010-11-05  Michele Tavella <michele.tavella@epfl.ch>
 % TODO Add call info
@@ -15,12 +15,12 @@ if(nargin < 7)
 end
 
 % Create extra/ directory
-[extra.directory, extra.basename] = eegc3_mkextra(filegdf, 'eegc3');
+[extra.directory, extra.basename] = eegc3_mkextra(filexdf, 'eegc3');
 
 % Inialize BCI structure
 bci = eegc3_smr_newbci();
 bci.trace.eegc3_smr_simloop.datetime    = eegc3_datetime();
-bci.trace.eegc3_smr_simloop.filegdf     = filegdf;
+bci.trace.eegc3_smr_simloop.filexdf     = filexdf;
 bci.trace.eegc3_smr_simloop.filetxt     = filetxt;
 bci.trace.eegc3_smr_simloop.rejection   = rejection;
 bci.trace.eegc3_smr_simloop.integration = integration; 
@@ -31,7 +31,7 @@ bci.trace.eegc3_smr_simloop.figbasename = ...
 	strrep([extra.directory '/' extra.basename], '.gdf', '');
 
 printf('[eegc3_smr_simloop] Running simulated SMR-BCI loop:\n');
-printf(' < GDF:         %s\n', bci.trace.eegc3_smr_simloop.filegdf);
+printf(' < GDF:         %s\n', bci.trace.eegc3_smr_simloop.filexdf);
 printf(' < TXT:         %s\n', bci.trace.eegc3_smr_simloop.filetxt);
 printf(' > MAT:         %s\n', bci.trace.eegc3_smr_simloop.filemat);
 printf(' - Rejection:   %f\n', bci.trace.eegc3_smr_simloop.rejection);
@@ -46,10 +46,12 @@ end
 
 % Import all the data we need
 printf('[eegc3_smr_simloop] Loading GDF/TXT files... ');
-[data.eeg, data.hdr] = sload(filegdf);
-data.aprobs = importdata(filetxt);
-data.cprobs = data.aprobs(:, 1:2);
-data.iprobs = data.aprobs(:, 3:4);
+[data.eeg, data.hdr] = sload(filexdf);
+if(isempty(filetxt) == false)
+	data.aprobs = importdata(filetxt);
+	data.cprobs = data.aprobs(:, 1:2);
+	data.iprobs = data.aprobs(:, 3:4);
+end
 printf('Done!\n');
 
 % Extract trigger informations
@@ -61,7 +63,7 @@ data.red(data.evt) = 1;
 data.lbl = data.hdr.EVENT.TYP;
 
 % Set up simulated BCI
-bci.analysis = load(fileanalysis);
+bci.analysis = load(filemat);
 bci.analysis = bci.analysis.analysis;
 bci.eeg = ndf_ringbuffer(bci.analysis.settings.eeg.fs, ...
 	bci.analysis.settings.eeg.chs, 1);
@@ -92,11 +94,13 @@ tmp.frame0 = -1;	% Starting sample for current frame
 tmp.frame1 = -1;	% Ending sample for current frame
 
 % Check for frame mismatch
-align.eeg = size(data.eeg, 1)/bci.frames;
-align.prb = size(data.aprobs, 1);
-align.delta = align.eeg-align.prb;
-printf('[eegc3_smr_simloop] Frames mismatch: EEG/PRB = %d/%d, Delta=%d\n', ...
-	align.eeg, align.prb, align.delta);
+if(isempty(filetxt) == false)
+	align.eeg = size(data.eeg, 1)/bci.frames;
+	align.prb = size(data.aprobs, 1);
+	align.delta = align.eeg-align.prb;
+	printf('[eegc3_smr_simloop] Frames mismatch: EEG/PRB = %d/%d, Delta=%d\n', ...
+		align.eeg, align.prb, align.delta);
+end
 
 % Simulate BCI loop
 trgdetect = [];
@@ -150,7 +154,7 @@ for i = 1:1:bci.framet
 	end
 end
 
-if(doplot)
+if(doplot && isempty(filetxt) == false)
 	eegc3_figure(doplot);
 		subplot(4, 1, 1:2)
 			plot(bci.t, data.cprobs(:, 1), 'ko');
