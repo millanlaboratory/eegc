@@ -1,6 +1,7 @@
 % 2010-11-27  Michele Tavella <michele.tavella@epfl.ch>
-[cues, protocol, compat] = eegc3_smr_newevents()
+function [cues, protocol, compat] = eegc3_smr_newevents()
 
+protocol = {};
 protocol.off 				= hex2dec('8000');
 protocol.inc 				= hex2dec('030a');
 protocol.trial 				= hex2dec('0300');
@@ -13,6 +14,7 @@ protocol.cross 				= hex2dec('0312');
 protocol.beep 				= hex2dec('0311');
 protocol.cueundef 			= hex2dec('030f');
 
+cues = {};
 cues.right_hand_mi 			= hex2dec('0302');
 cues.left_hand_mi 			= hex2dec('0301');
 cues.both_hands_mi 			= hex2dec('0305');
@@ -24,4 +26,5 @@ cues.errp_notdetected 		= hex2dec('030c');
 cues.mi_onset_detected 		= hex2dec('010');
 cues.mi_onset_notdetected	= hex2dec('011');
 
+compat = {};
 compat.protocol.trialoff 	= hex2dec('02F6');
