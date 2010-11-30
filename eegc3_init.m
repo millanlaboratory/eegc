@@ -16,19 +16,4 @@ mtpath_include('$EEGC3_ROOT/performance/');
 mtpath_include('$EEGC3_ROOT/preprocessing/');
 mtpath_include('$EEGC3_ROOT/tools/');
 mtpath_include('$EEGC3_ROOT/visualization/');
-
-% Need to reshape this stuff
-warning('off','MATLAB:dispatcher:InexactCaseMatch');
-mtpath_include('$EEGC3_INCLUDES/xml4mat');
-mtpath_include('$EEGC3_INCLUDES/gaussian');
-mtpath_include('$EEGC3_INCLUDES/cva');
-mtpath_include('$EEGC3_INCLUDES/gdfmatlab');
-mtpath_include('$EEGC3_INCLUDES/gkde');
-mtpath_include('$EEGC3_INCLUDES/biosig');
-mtpath_include('$EEGC3_INCLUDES/biosig/t200');
-mtpath_include('$EEGC3_INCLUDES/biosig/t250');
-mtpath_include('$EEGC3_INCLUDES/biosig/t300');
-mtpath_include('$EEGC3_INCLUDES/biosig/t400');
-mtpath_include('$EEGC3_INCLUDES/biosig/t490');
-mtpath_include('$EEGC3_INCLUDES/biosig/t500');
-warning('on','MATLAB:dispatcher:InexactCaseMatch');
+mtpath_include('$EEGC3_INCLUDES/');
