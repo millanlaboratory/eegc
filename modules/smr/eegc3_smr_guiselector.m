@@ -87,7 +87,7 @@ other = get(handles.listboxFolders, 'String');
 selected = get(handles.listboxFolders, 'Value');
 list{end+1} = other{selected};
 set(handles.listboxSelected, 'String', list);
-if(selected <= length(other))
+if(selected < length(other))
     set(handles.listboxFolders, 'Value', selected + 1);
 end
 
@@ -166,7 +166,9 @@ function pushbuttonBrowse_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 folder = uigetdir;
-update_folders(handles, folder);
+if(folder)
+    update_folders(handles, folder);
+end
 
 % --- Executes on button press in pushbuttonClear.
 function pushbuttonClear_Callback(hObject, eventdata, handles)
@@ -174,6 +176,7 @@ function pushbuttonClear_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.listboxFolders, 'String', '');
+set(handles.listboxFolders, 'Value', 1);
 
 function update_folders(handles, folder)
 set(handles.editPath, 'String', folder);
