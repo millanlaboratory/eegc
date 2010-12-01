@@ -22,7 +22,7 @@ function varargout = eegc3_smr_guiselector(varargin)
 
 % Edit the above text to modify the response to help eegc3_smr_guiselector
 
-% Last Modified by GUIDE v2.5 01-Dec-2010 00:36:46
+% Last Modified by GUIDE v2.5 01-Dec-2010 07:42:15
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -237,6 +237,7 @@ function pushbuttonSimloop_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+f = 1;
 logfiles = get(handles.listboxSelected, 'String');
 for i = 1:length(logfiles)
     session = eegc3_cl_loadlog(logfiles{i});
@@ -260,6 +261,7 @@ for i = 1:length(logfiles)
                         str2num(session.runs.online{i}.i), ...
                        1000 + i);
             end
+            f = f + 1;
         end
     end
 end
@@ -285,4 +287,46 @@ function editExport_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton10.
+function pushbutton10_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton10 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+logfiles = get(handles.listboxSelected, 'String');
+f = 1;
+for i = 1:length(logfiles)
+    session = eegc3_cl_loadlog(logfiles{i});
+
+    if(isempty(session) == false)
+        for i = 1:length(session.runs.online)
+            if(session.trace.eegcversion == 2)
+                bci = eegc3_smr_simloop(...
+                    session.runs.online{i}.xdf, ...
+                   	session.runs.online{i}.txt, ...
+					session.runs.online{i}.classifier, ...
+					str2num(session.runs.online{i}.rejection), ... 
+					str2num(session.runs.online{i}.integration), ...
+					1000 + f);
+            else
+                bci = eegc3_smr_simloop(...
+                    	session.runs.online{i}.xdf, ...
+                        [], ...
+                        session.runs.online{i}.classifier, ...
+                        str2num(session.runs.online{i}.r), ... 
+                        str2num(session.runs.online{i}.i), ...
+                       1000 + f);
+            end
+            f = f + 1;
+            
+            [taskset, resetevents] = eegc3_smr_guesstask(bci.lbl);
+            eegc3_smr_simprotocol(bci, taskset.cues, taskset.colors, ...
+             [], [], 1, 2000 + f);
+              f = f + 1;
+       
+        end
+    end
 end
