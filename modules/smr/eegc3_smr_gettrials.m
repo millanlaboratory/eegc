@@ -2,6 +2,8 @@
 %
 % S is [Time x Bands x Channels]
 % Ts is [Time x Bandx x Channels x Trials]
+% poi is [N x 1] in fames/samples
+% dur is [1 x 1] in frames/samples
 
 function Ts = eegc3_smr_gettrials(S, poi, dur)
 
