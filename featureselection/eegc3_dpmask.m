@@ -1,6 +1,6 @@
 % 2010-12-07  Michele Tavella <michele.tavella@epfl.ch>
 
-function [M, Mall] = eegc3_dpmask(schannels, sbands, channels, bands)
+function [M, Mneg, Mall] = eegc3_dpmask(schannels, sbands, channels, bands)
 
 if(nargin == 2)
 	channels = [1:1:16];
@@ -16,10 +16,13 @@ if(nargin == 1)
 end
 
 M = zeros(length(channels), length(bands));
-Mall = ones(length(channels), length(bands));
+Mall = 0*M + 1;
+
 for c = schannels
 	freqs = sbands{c};
 	for f = freqs
 		M(c, find(bands == f)) = 1;
 	end
 end
+
+Mneg = -1*M + 1;
