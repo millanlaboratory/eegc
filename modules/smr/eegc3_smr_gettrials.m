@@ -4,7 +4,7 @@
 % poi is [N x 1] in fames/samples
 % dur is [1 x 1] in frames/samples
 
-function [St, t] = eegc3_smr_gettrials(S, Sf, dt, poi)
+function [St, t] = eegc3_smr_gettrials(S, Sf, poi, dt)
 
 dur = round(dt*Sf);
 t = mt_support(0, dur, Sf);

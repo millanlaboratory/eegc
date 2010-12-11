@@ -94,12 +94,19 @@ tmp.frame0 = -1;	% Starting sample for current frame
 tmp.frame1 = -1;	% Ending sample for current frame
 
 % Check for frame mismatch
+align = {};
+align.notaligned = false;
 if(isempty(filetxt) == false)
 	align.eeg = size(data.eeg, 1)/bci.frames;
 	align.prb = size(data.aprobs, 1);
 	align.delta = align.eeg-align.prb;
-	printf('[eegc3_smr_simloop] Frames mismatch: EEG/PRB = %d/%d, Delta=%d\n', ...
+	printf('[eegc3_smr_simloop] Mismatch: EEG/PRB = %d/%d, Delta=%d\n', ...
 		align.eeg, align.prb, align.delta);
+
+	if(align.delta)
+		printf('[eegc3_smr_simloop] Error: mismatch detected');
+		align.notaligned = true;
+	end
 end
 
 % Simulate BCI loop
@@ -154,7 +161,7 @@ for i = 1:1:bci.framet
 	end
 end
 
-if(doplot && isempty(filetxt) == false)
+if(doplot && isempty(filetxt) == false && align.notaligned == false);
 	eegc3_figure(doplot);
 		subplot(4, 1, 1:2)
 			plot(bci.t, data.cprobs(:, 1), 'ko');
