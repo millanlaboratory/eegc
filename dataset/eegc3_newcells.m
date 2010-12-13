@@ -1,6 +1,6 @@
 % 2010-12-13  Michele Tavella <michele.tavella@epfl.ch>
 
-function d = eegc3_newcells(n, s)
+function [d, l] = eegc3_newcells(n, s)
 
 if(nargin < 2)
 	s = [];
@@ -12,5 +12,12 @@ for i = 1:n
 		d{i} = [];
 	else
 		d{i} = nan(s);
+	end
+end
+
+if(nargout == 2)
+	l = {};
+	for i = 1:n
+		l{i} = 'none';
 	end
 end
