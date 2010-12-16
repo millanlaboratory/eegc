@@ -14,13 +14,24 @@ if(nargin == 1)
 end
 
 total = 0;
-for c = schannels
-	freqs = sbands{c};
-	for f = freqs
+if(length(schannels) > 1)
+	for c = schannels
+		freqs = sbands{c};
+		for f = freqs
+			b = find(bands == f);
+			ichannel(end+1) = c;
+			iband(end+1) = b;
+			labels{end+1} = sprintf('Ch. %d, %d Hz', c, f);
+			total = total + 1;
+		end
+	end
+else
+	c = schannels;
+	for f = sbands 
 		b = find(bands == f);
 		ichannel(end+1) = c;
 		iband(end+1) = b;
 		labels{end+1} = sprintf('Ch. %d, %d Hz', c, f);
-        total = total + 1;
+		total = total + 1;
 	end
 end
