@@ -20,7 +20,7 @@ for c = schannels
 		b = find(bands == f);
 		ichannel(end+1) = c;
 		iband(end+1) = b;
-		labels{end+1} = sprintf('Ch. %d, %d Hz', c, b);
+		labels{end+1} = sprintf('Ch. %d, %d Hz', c, f);
         total = total + 1;
 	end
 end
