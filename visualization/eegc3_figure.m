@@ -9,7 +9,9 @@ if(nargin >= 1)
 		h = figure(h);
 		set(h, 'Color',[1.0 1.0 1.0]);
     end
-    set(0,'DefaultFigureWindowStyle','docked');
+	% 2011-01-13  Michele Tavella <michele.tavella@epfl.ch>
+	% Keeping defaults
+    % set(0,'DefaultFigureWindowStyle','docked');
 else
 	h = figure;
 	set(h, 'Color',[1.0 1.0 1.0]);
