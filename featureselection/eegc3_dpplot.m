@@ -11,7 +11,7 @@ if(nargin < 5)
 end
 
 eegc3_figure(f);
-imagesc(M, [0 1]);
+imagesc(M);%, [0 1]);
 set(gca, 'YTick',      [1:1:length(channels)]);
 set(gca, 'YTickLabel', channels);
 set(gca, 'XTick',      [1:1:length(bands)]);
