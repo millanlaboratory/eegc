@@ -1,6 +1,9 @@
 % 2010-11-27  Michele Tavella <michele.tavella@epfl.ch>
 function [taskset, resetevents] = eegc3_smr_guesstask(labels)
 
+taskset = [];
+resetevents = [];
+
 [cues, protocol] = eegc3_smr_newevents();
 
 ulabels = unique(labels);

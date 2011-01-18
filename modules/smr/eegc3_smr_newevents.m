@@ -13,6 +13,8 @@ protocol.targetmiss 		= hex2dec('0382');
 protocol.cross 				= hex2dec('0312');
 protocol.beep 				= hex2dec('0311');
 protocol.cueundef 			= hex2dec('030f');
+protocol.trialbegin 		= hex2dec('0300');
+protocol.trialend 			= hex2dec('02f6'); % Will become 8300
 
 cues = {};
 cues.right_hand_mi 			= hex2dec('0302');

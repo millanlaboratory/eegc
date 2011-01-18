@@ -9,9 +9,12 @@ function roi = eegc3_smr_simprotocol(bci, cues, cuecolors, cuesskip, ...
 %   897		Target hit
 %   898		Target miss
 % For this reason, here we have some ROIs
+% TODO: use eegc3_smr_newevents()
 roi.hits = bci.evt(find(bci.lbl == 897));
 roi.miss = bci.evt(find(bci.lbl == 898));
 roi.cfbk = bci.evt(find(bci.lbl == 781));
+roi.tbeg = bci.evt(find(bci.lbl == 768));
+roi.tend = bci.evt(find(bci.lbl == 758));
 
 if(isempty(cues))
 	printf('[eegc3_smr_simprotocol] Guessing cues: ');
@@ -73,8 +76,16 @@ if(doplot)
 		for i = 1:length(roi.cues{j})
 			eegc3_smr_barv(roi.cues{j}(i)/bci.Sf, cuecolors{j}, 3);
 		end
+    end
+    % Draw tbeg
+    for i = 1:length(roi.tbeg)
+		eegc3_smr_barv(roi.tbeg(i)/bci.Sf, 'c', 2);
+    end
+    % Draw tend
+    for i = 1:length(roi.tend)
+		eegc3_smr_barv(roi.tend(i)/bci.Sf, 'c', 2);
 	end
-
+    
 	ylim([-0.05 +1.05]);
 	% Draw target hit
 	for i = 1:length(roi.hits)
@@ -105,6 +116,16 @@ if(doplot)
 				eegc3_smr_bart([roi.trial0(i) roi.trial1(i)]/bci.Sf);
 			end
 		end
+    end
+    % Draw tbeg 
+	for i = 1:length(roi.tbeg)
+		text(roi.tbeg(i)/bci.Sf, 1.015, '<', 'HorizontalAlignment', 'right');
+        text(roi.tbeg(i)/bci.Sf, -0.015, 'tb', 'HorizontalAlignment', 'center');
+    end
+    % Draw tend 
+	for i = 1:length(roi.tend)
+		text(roi.tend(i)/bci.Sf, 1.015, '>', 'HorizontalAlignment', 'left');
+        text(roi.tend(i)/bci.Sf, -0.015, 'te', 'HorizontalAlignment', 'center');
 	end
 	drawnow;
 	eegc3_figure(doplot, 'fill');
