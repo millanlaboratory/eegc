@@ -25,6 +25,7 @@ cues.rest_mi 				= hex2dec('030f');
 cues.tongue_mi 				= hex2dec('0304');
 cues.errp_detected 			= hex2dec('030b');
 cues.errp_notdetected 		= hex2dec('030c');
+cues.inc                    = hex2dec('030a');
 cues.mi_onset_detected 		= hex2dec('010');
 cues.mi_onset_notdetected	= hex2dec('011');
 

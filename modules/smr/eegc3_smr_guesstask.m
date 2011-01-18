@@ -48,6 +48,7 @@ did.left_hand_mi 	= false;
 did.both_hands_mi 	= false;
 did.both_feet_mi 	= false;
 did.rest_mi 		= false;
+did.inc             = false;
 
 for l = ulabels
 	did.right_hand_mi 	= did.right_hand_mi || (l == cues.right_hand_mi);
@@ -55,6 +56,7 @@ for l = ulabels
 	did.both_hands_mi 	= did.both_hands_mi || (l == cues.both_hands_mi);
 	did.both_feet_mi 	= did.both_feet_mi || (l == cues.both_feet_mi);
 	did.rest_mi 		= did.rest_mi || (l == cues.rest_mi);
+    did.inc     		= did.inc || (l == cues.inc);
 end
 
 printf('[eegc3_smr_guesstask] Guessing taskset:  ');
@@ -109,7 +111,6 @@ taskset.bar.down  = taskset.cues(4);
 taskset.cues = taskset.cues(taskset.cues > 0);
 taskset.tot = length(taskset.cues);
 
-
 g = [2 72 0]/255;
 r = [201 49 43]/255;
 b = [0 27 91]/255;
@@ -122,4 +123,3 @@ switch(taskset.tot)
 	case 2
 		taskset.colors = {r b};
 end
-
