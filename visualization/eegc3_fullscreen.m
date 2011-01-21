@@ -4,5 +4,8 @@ function eegc3_fullscreen(f)
 if(nargin == 0)
 	f = gcf();
 end
-ss = get(0, 'ScreenSize');
-set(f, 'Position', [0 0 ss(3) ss(4)]);
+
+if(strcmp(get(gcf, 'WindowStyle'), 'docked') == 0)
+    ss = get(0, 'ScreenSize');
+    set(f, 'Position', [0 0 ss(3) ss(4)]);
+end
