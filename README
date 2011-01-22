@@ -1,5 +1,13 @@
-2010-11-08  Michele Tavella <michele.tavella@epfl.ch>
+2011-01-22  Michele Tavella <michele.tavella@epfl.ch>
 
+INSTALL
+Remember to add this to your bashrc:
+ export EEGC3_ROOT=~/Git/inhouse/eegc3
+where "~/Git/inhouse/eegc3" is your eegc3 installation directory
+
+
+DESCRIPTION
+EEGC3 contains several things. This is a temporary list:
 	Applications (eegc2_cnbi_main, etc.)
 	Configuration
 	Classification
@@ -14,14 +22,9 @@
 	EEG preprocessing (DC, CAR, Laplacian)
 	Test tools
 
-2010-11-08  Michele Tavella <michele.tavella@epfl.ch>
-
+DEVELOPMENT
+As today, this is what we said:
 			Nov-Dec 2010	Jan-Feb 2011
 Simis		ds				fe, fs
 Andrea		io				pp
 Michele		tt				dm, cf
-
-
-2010-11-26  Michele Tavella <michele.tavella@epfl.ch>
-Remember to add this to your bashrc:
- export EEGC3_ROOT=~/Git/inhouse/eegc3
