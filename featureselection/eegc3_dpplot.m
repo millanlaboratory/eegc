@@ -10,12 +10,14 @@ if(nargin < 6)
     plotcb = false;
 end
 
-eegc3_figure(f);
+if(f > 0)
+    eegc3_figure(f);
+end
 imagesc(M, interval);
-set(gca, 'YTick',      [1:1:length(channels)]);
-set(gca, 'YTickLabel', channels);
-set(gca, 'XTick',      [1:1:length(bands)]);
-set(gca, 'XTickLabel', bands);
+set(gca, 'YTick',      [1:2:length(channels)]);
+set(gca, 'YTickLabel', channels(1:2:end));
+set(gca, 'XTick',      [1:4:length(bands)]);
+set(gca, 'XTickLabel', bands(1:4:end));
 xlabel('Band [Hz]');
 ylabel('Channel');
 colormap(1-gray);
