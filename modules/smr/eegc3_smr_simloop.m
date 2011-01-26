@@ -77,6 +77,8 @@ bci.iprobs = [];	% Integrated probabilities
 bci.afeats = nan(bci.framet, ...
 	length(bci.analysis.settings.features.psd.freqs), ...
 	bci.analysis.settings.eeg.chs);
+bci.rfeats = nan(bci.framet, ...
+	size(bci.analysis.tools.net.gau.M, 3));
 bci.nfeats = nan(bci.framet, ...
 	size(bci.analysis.tools.net.gau.M, 3));
 bci.evt = [];		% LPT Trigger position (in frames) 
@@ -124,12 +126,13 @@ for i = 1:1:bci.framet
 	bci.eeg = ndf_add2buffer(bci.eeg, tmp.framed(:,1:end-1));
 	bci.tri = ndf_add2buffer(bci.tri, tmp.framed(:,end));
 	%bci.support = eegserver_mi_buffer_support(bci.support, tmp.framed);
-	[bci.support, tmp.nfeat, tmp.afeat] = ...
+	[bci.support, tmp.nfeat, tmp.afeat, tmp.rfeat] = ...
 		eegc3_smr_classify(bci.analysis, bci.eeg, bci.support);
 	
 	% Add features to BCI structure if not empty
 	if(isempty(tmp.nfeat) == false)
 		bci.nfeats(tmp.framep, :) = tmp.nfeat;
+		bci.rfeats(tmp.framep, :) = tmp.rfeat;
 	end
 	if(isempty(tmp.afeat) == false)
 		% TODO

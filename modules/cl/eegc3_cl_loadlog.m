@@ -21,7 +21,7 @@ switch(exist(filename))
 			return;
 		end
 	case 0
-		printf('[eegc3_cl_loadlog] Error: file/directory not found');
+		printf('[eegc3_cl_loadlog] Error: file/directory not found: %s\n', filename);
 		return;
 end
 
