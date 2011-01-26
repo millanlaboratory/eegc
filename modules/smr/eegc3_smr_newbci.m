@@ -14,6 +14,7 @@ bci.framet 		= [];	% Frame total (in samples)
 bci.cprobs 		= [];	% Classifier oputput
 bci.iprobs 		= [];	% Integrated probabilities
 bci.afeats 		= [];	% All PSD features
+bci.rfeats 		= [];	% Non-normalized online-only PSD features
 bci.nfeats 		= [];	% Online-only PSD features
 bci.evt 		= [];	% LPT Trigger position (in frames) 
 bci.trg 		= [];	% LPT Trigger value (TODO)

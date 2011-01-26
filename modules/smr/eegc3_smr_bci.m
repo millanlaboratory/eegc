@@ -10,7 +10,7 @@
 % Beware: if window size does not match [problem.dw x problem.numChs], 
 %         an empty vector is returned
 
-function [postprob, nfeature, afeature] = eegc3_smr_bci(analysis, buffer)
+function [postprob, nfeature, afeature, rfeature] = eegc3_smr_bci(analysis, buffer)
 
 % Preprocess EEG
 sample = eegc3_smr_preprocess(buffer, ...
@@ -30,7 +30,7 @@ if(nargout == 2)
 		analysis.settings.features.psd.win, ...
 		analysis.settings.features.psd.ovl, ...
 		analysis.tools.features.channels);
-elseif(nargout == 3)
+elseif(nargout >= 3)
 	% If offline:
 	% - compute all the channels 
 	% - for each channel, return all the bands (afeature)
@@ -57,7 +57,8 @@ end
 % TODO: discover what this does...
 %
 % Feature normalization
-nfeature = eegc3_smr_npsd(feature');
+rfeature = feature';
+nfeature = eegc3_smr_npsd(rfeature);
 
 % Classification
 [activations postprob] = gauClassifier(...
