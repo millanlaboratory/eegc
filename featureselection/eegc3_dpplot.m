@@ -20,7 +20,9 @@ set(gca, 'XTick',      [1:4:length(bands)]);
 set(gca, 'XTickLabel', bands(1:4:end));
 xlabel('Band [Hz]');
 ylabel('Channel');
-colormap(1-gray);
+%colormap(1-gray);
+colormap(1-copper);
 if(plotcb)
     colorbar;
 end
+axis image;
