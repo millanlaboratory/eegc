@@ -55,6 +55,24 @@ if(nargin > 1)
 			else
 				disp('[eegc3_figure] Error: no basename specified');
             end
+        case 'rawprint'
+			if(nargin >= 3)
+				disp(['[eegc3_figure] RAW-printing to ' basename]);
+				if(strfind(basename, '.pdf'))
+                    print(h, '-dpdf',   basename);
+                elseif(strfind(basename, '.png'))
+                    print(h, '-dpng',   basename);
+                elseif(strfind(basename, '.eps'))
+                    print(h, '-depsc2', basename);
+                else
+                    print(h, '-dpdf',   [basename '.pdf']);
+                    print(h, '-dpng',   [basename '.png']);
+                    print(h, '-depsc2', [basename '.eps']);
+                end
+			else
+				disp('[eegc3_figure] Error: no basename specified');
+            end
+
         otherwise	
             set(gcf, 'Name', options);
 			h = annotation('textbox', [0.5 0.9 0.10 0.10]); 
