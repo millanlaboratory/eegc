@@ -1,10 +1,21 @@
 % 2010-12-10  Michele Tavella <michele.tavella@epfl.ch>
+%
+% function F = eegc3_fs(d, k)
+% d   [samples x dimensions]
+% k   [samples x 1]
+% 
 function F = eegc3_fs(d, k)
 
 [N, D] = size(d);
+F = nan(D, 1);
 
-k1 = find(k == 1);
-k2 = find(k == 2);
+u = unique(k);
+if(length(u) ~= 2)
+    return;
+end
+
+k1 = find(k == u(1));
+k2 = find(k == u(2));
 
 m1 = mean(d(k1, :));
 m2 = mean(d(k2, :));
