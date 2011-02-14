@@ -72,7 +72,6 @@ if(nargin > 1)
 			else
 				disp('[eegc3_figure] Error: no basename specified');
             end
-
         otherwise	
             set(gcf, 'Name', options);
 			h = annotation('textbox', [0.5 0.9 0.10 0.10]); 

@@ -5,7 +5,11 @@ ichannel = [];
 iband = [];
 labels = {};
 
-if(nargin == 1)
+chnames = {};
+if(nargin == 2)
+    chnames = sbands;
+end
+if(nargin == 1 || nargin == 2)
 	analysis = schannels;
 	channels = [1:1:analysis.settings.eeg.chs];
 	bands = analysis.settings.features.psd.freqs;
@@ -21,7 +25,11 @@ if(length(schannels) > 1)
 			b = find(bands == f);
 			ichannel(end+1) = c;
 			iband(end+1) = b;
-			labels{end+1} = sprintf('Ch. %d, %d Hz', c, f);
+            if(isempty(chnames))
+                labels{end+1} = sprintf('Ch. %d, %d Hz', c, f);
+            else
+                labels{end+1} = sprintf('%s %dHz', chnames{c}, f);
+            end
 			total = total + 1;
 		end
 	end
