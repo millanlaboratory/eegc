@@ -1,5 +1,7 @@
 % 2010-12-05  Michele Tavella <michele.tavella@epfl.ch>
 %
+% [St, t] = eegc3_smr_gettrials(S, Sf, poi, dt)
+% 
 % St is [Time x Bandx x Channels x Trials]
 % poi is [N x 1] in fames/samples
 % dur is [1 x 1] in frames/samples

@@ -14,4 +14,4 @@ mtpath_include('$EEGC3_ROOT/performance/');
 mtpath_include('$EEGC3_ROOT/preprocessing/');
 mtpath_include('$EEGC3_ROOT/tools/');
 mtpath_include('$EEGC3_ROOT/visualization/');
-mtpath_include('$EEGC3_INCLUDES/');
+mtpath_include('$EEGC3_ROOT/toolboxes/');
