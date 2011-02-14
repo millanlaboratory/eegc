@@ -6,7 +6,7 @@ if(nargin < 1)
 end
 
 if(nargin < 2)
-    vp = 0.75;
+    vp = 1.00;
 end
 
 if(strcmp(get(gcf, 'WindowStyle'), 'docked') == 0)
