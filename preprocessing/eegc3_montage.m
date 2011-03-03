@@ -1,4 +1,8 @@
 function [lap, plot_index, n_rows, n_cols] = eegc3_montage(montage)
+% 2011-03-03  Michele Tavella <michele.tavella@epfl.ch>
+% Code provided by R. Leeb <robert.leeb@epfl.ch> on 2011-03-03
+% Originally called getMontage
+%
 % Calculates spatial filter matrix for Laplacian derivations.
 % 
 % Returns a spatial filter matrix used to calculate Laplacian derivations as
@@ -10,19 +14,30 @@ function [lap, plot_index, n_rows, n_cols] = eegc3_montage(montage)
 %   [lap, plot_index, n_rows, n_cols] = getMontage(montage);
 %
 % Input parameters:
-%   montage ... Electrode montage, either a predefined string (currently, 
-%               '16ch', '22ch', '28ch' and '60ch' are available) or a matrix
-%               containing ones where the electrodes are located and zeros
-%               elsewhere
+%   montage ... (1) a matrix containing the electrode number where the 
+%                   electrodes are located  and zeros elsewhere.
+%               For backwards compatibility reasons, optionally
+%               (2) a matrix containing ones where the electrodes  are 
+%                   located  and zeros elsewhere can be used, assuming a 
+%                   increasing sequential order.
+%               (3) Furthermore some predifined layouts are supported via
+%                   a string (currently, '16ch', '22ch', '24ch', '28ch',
+%                    '30ch',  '58ch' and '60ch').
 %
 % Output parameters:
 %   lap        ... Laplacian filter matrix
 %   plot_index ... Indices for plotting the montage
 %   n_rows     ... Number of rows of the montage
 %   n_cols     ... Number of columns of the montage
+%
+% e.g. Possible matrix montages ....
+% montage=[0 1 0;...     montage=[0 1 0;...     montage=[0 3 0;...
+%          1 1 1;...              2 3 4;...              4 1 2;...
+%          0 1 0];                0 5 0];                0 5 0];
+% [lap, plot_index, n_rows, n_cols] = getMontage(montage);
 
-% Copyright by Clemens Brunner
-% $Revision: 0.2 $ $Date: 10/03/2006 16:13:07 $
+% Copyright by Clemens Brunner and Robert Leeb
+% $Revision: 0.3 $ $Date: 18/09/2009 16:47:07 $
 % E-Mail: clemens.brunner@tugraz.at
 
 % This program is free software; you can redistribute it and/or modify it
@@ -39,17 +54,99 @@ function [lap, plot_index, n_rows, n_cols] = eegc3_montage(montage)
 % with this program; if not, write to the Free Software Foundation, Inc.,
 % 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-if(nargin == 0)
-    montage = [0 0 1 0 0; 1 1 1 1 1; 1 1 1 1 1; 1 1 1 1 1];
-end
-temp = montage;
-plot_index = find(temp' == 1);
-n_rows = size(temp, 1);
-n_cols = size(temp, 2);
+if (ischar(montage))  % Predefined layouts
+    switch montage
+        case '16ch'
+            temp = [0 0 1 0 0;...
+                    0 1 1 1 0;...
+                    0 1 1 1 0;...
+                    1 1 1 1 1;...
+                    0 1 1 1 0;...
+                    0 0 1 0 0];
+            plot_index = find(temp' == 1);
+            n_rows = size(temp, 1);
+            n_cols = size(temp, 2);
+        case '22ch'
+            temp = [0 0 0 1 0 0 0;...
+                    0 1 1 1 1 1 0;...
+                    1 1 1 1 1 1 1;...
+                    0 1 1 1 1 1 0;...
+                    0 0 1 1 1 0 0;...
+                    0 0 0 1 0 0 0];
+            plot_index = find(temp' == 1);
+            n_rows = size(temp, 1);
+            n_cols = size(temp, 2);
+        case '24ch'
+            temp = [0 1 0 0 1 0 0 1 0;...
+                    1 1 1 1 1 1 1 1 1;...
+                    1 1 1 1 1 1 1 1 1;...
+                    0 1 0 0 1 0 0 1 0];
+            plot_index = find(temp' == 1);
+            n_rows = size(temp, 1);
+            n_cols = size(temp, 2);     
+        case '28ch'
+            temp = [0 0 0 1 0 0 0;...
+                    0 1 1 1 1 1 0;...
+                    1 1 1 1 1 1 1;...
+                    0 1 1 1 1 1 0;...
+                    0 0 1 1 1 0 0;...
+                    0 0 0 1 0 0 0;...
+                    1 1 1 0 1 1 1];
+            plot_index = find(temp' == 1);
+            n_rows = size(temp, 1);
+            n_cols = size(temp, 2);
+        case '30ch'
+            temp = [0 0 0 1 1 1 0 0 0;...
+                    1 1 1 1 1 1 1 1 1;...
+                    1 1 1 1 1 1 1 1 1;...
+                    1 1 1 1 1 1 1 1 1];
+            plot_index = find(temp' == 1);
+            n_rows = size(temp, 1);
+            n_cols = size(temp, 2);
+        case '58ch'
+            temp = [0 0 1 1 1 1 1 0 0;...
+                    1 1 1 1 1 1 1 1 1;...
+                    1 1 1 1 1 1 1 1 1;...
+                    1 1 1 1 1 1 1 1 1;...
+                    1 1 1 1 1 1 1 1 1;...
+                    1 1 1 1 1 1 1 1 1;...
+                    0 0 1 1 1 1 1 0 0;...
+                    0 0 0 1 1 1 0 0 0];...
+            plot_index = find(temp' == 1);
+            n_rows = size(temp, 1);
+            n_cols = size(temp, 2);
+        case '60ch'
+            temp = [0 0 0 0 0 1 0 0 0 0 0;...
+                    0 0 0 0 1 1 1 0 0 0 0;...
+                    0 0 0 1 1 1 1 1 0 0 0;...
+                    0 0 1 1 1 1 1 1 1 0 0;...
+                    0 1 1 1 1 1 1 1 1 1 0;...
+                    1 1 1 1 1 1 1 1 1 1 1;...
+                    0 1 1 1 1 1 1 1 1 1 0;...
+                    0 0 1 1 1 1 1 1 1 0 0;...
+                    0 0 0 1 1 1 1 1 0 0 0;...
+                    0 0 0 0 1 1 1 0 0 0 0];
+            plot_index = find(temp' == 1);
+            n_rows = size(temp, 1);
+            n_cols = size(temp, 2);
+    end;
+else  % User-defined layouts in the form of a matrix
+    temp = montage;
+    plot_index = find(temp' == 1);
+    n_rows = size(temp, 1);
+    n_cols = size(temp, 2);
+end;
 
 counter = 1;
 temp = temp';
 lap = zeros(size(temp,1), size(temp,2));
+
+% used electrode positions instead of '1' 
+positions=[];
+if sum(sum(temp))~=(sum(sum(temp>0)))
+   [tmp,positions]=sort(temp(find(temp)));
+   temp = temp>0;
+end
 
 for (k = 1:numel(temp))
     if temp(k) == 1
@@ -89,5 +186,10 @@ for k = 1:length(neighbors)
     temp = neighbors(k,~isnan(neighbors(k,:)));  % Neighbors of electrode k
     lap(k,temp) = -1/length(temp);
 end;
+
+if ~isempty(positions)
+    % rearrange concerning correcdt electrode positions
+    lap = lap(positions,positions);
+end
 
 lap = lap';
