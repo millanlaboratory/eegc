@@ -74,10 +74,10 @@ if(nargin > 1)
             end
         otherwise	
             set(gcf, 'Name', options);
-			h = annotation('textbox', [0.5 0.9 0.10 0.10]); 
-			set(h, 'HorizontalAlignment', 'center');
-			set(h, 'EdgeColor', [1 1 1]);
-			set(h, 'String', options); 
+			%h = annotation('textbox', [0.5 0.9 0.10 0.10]); 
+			%set(h, 'HorizontalAlignment', 'center');
+			%set(h, 'EdgeColor', [1 1 1]);
+			%set(h, 'String', options); 
 	end
 end
 
