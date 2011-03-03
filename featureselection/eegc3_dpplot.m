@@ -14,13 +14,17 @@ if(f > 0)
     eegc3_figure(f);
 end
 imagesc(M, interval);
-set(gca, 'YTick',      [1:2:length(channels)]);
-set(gca, 'YTickLabel', channels(1:2:end));
+if(iscell(channels))
+    set(gca, 'YTick',      1:1:length(channels));
+    set(gca, 'YTickLabel', channels);
+else
+    set(gca, 'YTick',      [1:2:length(channels)]);
+    set(gca, 'YTickLabel', channels(1:2:end));
+end
 set(gca, 'XTick',      [1:4:length(bands)]);
 set(gca, 'XTickLabel', bands(1:4:end));
 xlabel('Band [Hz]');
 ylabel('Channel');
-%colormap(1-gray);
 colormap(1-copper);
 if(plotcb)
     colorbar;
