@@ -10,11 +10,13 @@ f = (0:n-1)*(fs/n);     	% Frequency range
 y0 = fftshift(y);          	% Rearrange y values
 f0 = (-n/2:n/2-1)*(fs/n);  	% 0-centered frequency range
 p0 = y0.*conj(y0)/n;   	% 0-centered power
-h0 = unwrap(angle(y0)) * 180 / pi;
+%h0 = unwrap(angle(y0)) * 180 / pi;
+h0 = angle(y0);
 
-b0 = f0(fs/2+1:end);
-[b1, i1] = intersect(b0, bands);
+%b0 = f0(fs/2+1:end);
 
-f = b0(i1);
+[b1, i1] = intersect(f0, bands);
+
+f = f0(i1);
 S = p0(i1);
 P = h0(i1);
