@@ -1,0 +1,10 @@
+Package: eegc3
+Version: 0.0.1
+Section: main
+Priority: optional
+Architecture: all
+Depends: libcnbiloop-mex, libtobicore-mex
+Installed-Size:
+Maintainer: Michele Tavella <michele.tavella@epfl.ch>
+Description: Matlab Toolbox for the CNBI BCI
+ This package installs EEGC3.
