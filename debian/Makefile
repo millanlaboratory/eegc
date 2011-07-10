@@ -3,11 +3,15 @@
 all: clean copy deb
 
 copy:
-	rsync -av ../ eegc3/DEBIAN/opt/ --exclude debian --exclude git --delete-excluded
+	rsync -av ../ eegc3/opt/ \
+		--exclude debian \
+		--exclude .git \
+		--exclude .dummy \
+		--delete-excluded
 
 deb:
 	 dpkg --build eegc3
 
 clean:
 	rm -fv *.deb
-	rm -frv eegc3/DEBIAN/opt/*
+	rm -frv eegc3/opt/*
