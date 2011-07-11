@@ -3,7 +3,8 @@
 all: clean copy deb
 
 copy:
-	rsync -av ../ eegc3/opt/ \
+	mkdir -pv eegc3/opt/eegc3
+	rsync -av ../ eegc3/opt/eegc3/ \
 		--exclude debian \
 		--exclude .git \
 		--exclude .dummy \
