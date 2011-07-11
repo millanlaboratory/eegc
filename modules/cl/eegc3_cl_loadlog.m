@@ -31,8 +31,8 @@ session = eegc3_cl_newsession();
 session.base= strrep(session.base, '.log', '');
 [session.name, session.root] = mtpath_basename(session.path);
 
-cache = mt_strsplit('.', session.name);
-if(length(cache) == 2)
+cache = mt_strsplit('_', session.name);
+if(length(cache) >= 2)
 	session.daytime = cache{1};
 	session.subject = cache{2};
 else
