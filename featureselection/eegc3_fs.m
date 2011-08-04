@@ -6,6 +6,10 @@
 % 
 function F = eegc3_fs(d, k)
 
+if(size(d,1) ~= length(k))
+    error('Data cardinality does not match labels cardinality');
+end
+    
 [N, D] = size(d);
 F = nan(D, 1);
 
