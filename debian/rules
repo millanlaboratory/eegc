@@ -1,0 +1,30 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+export DEB_BUILD_OPTIONS=nocheck
+#dh_auto_test
+
+build:
+	#@echo "No building required. Binary package."
+
+install:
+	@echo "-------------------------------------------------------"
+	@echo ${DESTDIR}
+	@echo "-------------------------------------------------------"
+
+clean:
+	@echo "Cleaning not required. Binary package."
+
+%:
+	dh  $@
+	
+#cp -av src/`dpkg --print-architecture`/* ${DESTDIR}
+#mkdir -p $(PWD)/debian/eegc3/opt/eegc3/
+#rsync -a $(PWD)/ $(PWD)/debian/eegc3/opt/eegc3/ \
+#	--exclude "debian" \
+#	--exclude ".git" \
+#	--exclude "session.vim" \
+#	--delete
+

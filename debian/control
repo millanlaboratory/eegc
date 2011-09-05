@@ -1,0 +1,14 @@
+Source: eegc3 
+Section: libs
+Priority: extra
+Maintainer: Michele Tavella <michele.tavella@epfl.ch>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.3
+Homepage: http://cnbisrv02.epfl.ch
+
+Package: eegc3
+Section: libs
+Architecture: any
+Description: CNBI Toolkit metapackage
+ This package installs all the components of the CNBI Toolkit.
+
