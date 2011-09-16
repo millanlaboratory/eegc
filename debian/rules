@@ -2,8 +2,14 @@
 # -*- makefile -*-
 
 #export DH_VERBOSE=1
-export DEB_BUILD_OPTIONS=nocheck
-export LDFLAGS=""
+#export DEB_BUILD_OPTIONS=nocheck
 
 %:
 	dh  $@
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+
+override_dh_strip:
+
