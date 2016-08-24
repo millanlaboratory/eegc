@@ -45,7 +45,7 @@ echo "[eegc3_install] - Source directory:" $SRCDIR
 echo "[eegc3_install] - Destination directory:" $DSTDIR
 
 printf "[eegc3_install] - Installing eegc3..."
-rsync -a --delete $SRCDIR/ $DSTDIR --exclude ".git" --exclude "debian" --exclude "install.sh" --exclude "Makefile" --exclude "AUTHORS" --exclude "README" 2>/dev/null
+rsync -a --delete $SRCDIR/ $DSTDIR --exclude ".git" --exclude "debian" --exclude "eegc3_install.sh" --exclude "Makefile" --exclude "AUTHORS" --exclude "README" 2>/dev/null
 if [[ $? -gt 0 ]]
 then
 	printf "Failure. Run the script with sudo privilegies if the destination folder is protected\n"
