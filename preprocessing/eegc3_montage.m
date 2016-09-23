@@ -132,7 +132,7 @@ if (ischar(montage))  % Predefined layouts
     end;
 else  % User-defined layouts in the form of a matrix
     temp = montage;
-    plot_index = find(temp' == 1);
+    plot_index = find(temp' >= 1); % Modification 29.10.2012 - Bug resolved to compute laplacian correctly for gtec16
     n_rows = size(temp, 1);
     n_cols = size(temp, 2);
 end;
@@ -173,7 +173,7 @@ for (k = 1:numel(lap))
             neighbors(electrode, col) = lap(k-1);
             col = col + 1;
         end;
-        if (k + size(lap, 1) < numel(lap) && lap(k + size(lap, 1)) ~= 0)  % B
+        if (k + size(lap, 1) <= numel(lap) && lap(k + size(lap, 1)) ~= 0)  % B % Modification 29.10.2012 - Bug resolved to compute laplacian correctly for gtec16
             neighbors(electrode, col) = lap(k + size(lap, 1));
             col = col + 1;
         end;

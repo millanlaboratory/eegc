@@ -8,3 +8,5 @@
 
 function accprobs_new = eegc3_expsmooth(accprobs_old, rawprobs_now, alpha)
 accprobs_new = alpha * accprobs_old + (1 - alpha) * rawprobs_now;
+
+

@@ -56,12 +56,18 @@ end
 % 2010-11-27  Michele Tavella <michele.tavella@epfl.ch>
 % TODO: discover what this does...
 %
-% Feature normalization
 rfeature = feature';
-nfeature = eegc3_smr_npsd(rfeature);
+
+% Feature scaling (Simis: to be avoided!!!)
+if(analysis.options.classification.norm)
+     nfeature = eegc3_smr_npsd(rfeature);
+else
+     nfeature = rfeature;
+end
 
 % Classification
 [activations postprob] = gauClassifier(...
 	analysis.tools.net.gau.M, ...
 	analysis.tools.net.gau.C, ...
 	nfeature);
+
