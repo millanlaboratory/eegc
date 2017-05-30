@@ -22,6 +22,11 @@ if(ndf_isfull(buffer))
 			eegc3_smr_bci(analysis, buffer);
     end
     
+    % 2017.05.30 - ltonin
+    % Store and return raw probabilities for different integration
+    % frameworks
+    support.rawprobs = support.cprobs;
+    
     if(support.rejection > 0)
         if(max(support.cprobs) < support.rejection)
             support.cprobs = support.nprobs;
