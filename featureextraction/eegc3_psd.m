@@ -30,9 +30,9 @@ if(dolog == true)
     psd = log(psd);
 end
 %[val, set] = intersect(frq, frqs);
-MinIndex = [];
+set = [];
 for fr=1:frqs
-    [~, MinIndex(fr)] = min(abs( frq - frqs(fr)));
+    [~, set(fr)] = min(abs( frq - frqs(fr)));
 end
 
 if(length(set) ~= length(frqs))
