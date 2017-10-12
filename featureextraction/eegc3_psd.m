@@ -31,7 +31,7 @@ if(dolog == true)
 end
 %[val, set] = intersect(frq, frqs);
 set = [];
-for fr=1:frqs
+for fr=1:length(frqs)
     [~, set(fr)] = min(abs( frq - frqs(fr)));
 end
 
