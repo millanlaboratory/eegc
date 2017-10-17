@@ -24,8 +24,9 @@ function [pattern, frequencies]  = eegc3_psd(EEGw, frqs, fs, ...
 if(nargin < 6)
     dolog = true;
 end
-
+warning off;
 [psd, frq] = pwelch(EEGw, fs*window, fs*window*overlap , [], fs);
+warning on;
 if(dolog == true)
     psd = log(psd);
 end
