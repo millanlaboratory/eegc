@@ -1,12 +1,12 @@
 2011-01-22  Michele Tavella <michele.tavella@epfl.ch>
 
-INSTALL
+# INSTALL
 Remember to add this to your bashrc:
  export EEGC3_ROOT=~/Git/inhouse/eegc3
 where "~/Git/inhouse/eegc3" is your eegc3 installation directory
 
 
-DESCRIPTION
+# DESCRIPTION
 EEGC3 contains several things. This is a temporary list:
 	Applications (eegc2_cnbi_main, etc.)
 	Configuration
@@ -22,7 +22,7 @@ EEGC3 contains several things. This is a temporary list:
 	EEG preprocessing (DC, CAR, Laplacian)
 	Test tools
 
-DEVELOPMENT
+# DEVELOPMENT
 As today, this is what we said:
 			Nov-Dec 2010	Jan-Feb 2011
 Simis		ds				fe, fs
